@@ -35,7 +35,7 @@ def load_data():
         'late_aircraft_delay': 'float32',
     }
 
-    df = pd.read_csv("flight_data_2024.csv", usecols=needed_cols, dtype=dtypes)
+    df = pd.read_csv("flight_data_2024_small.csv", usecols=needed_cols, dtype=dtypes)
     df = df.dropna(subset=['dep_delay', 'op_unique_carrier'])
     return df
 
@@ -43,12 +43,12 @@ def load_data():
 try:
     df = load_data()
 except FileNotFoundError:
-    st.error("Файл `flight_data_2024.csv` не найден. Положите его в папку с проектом.")
+    st.error("Файл `flight_data_2024_small.csv` не найден. Положите его в папку с проектом.")
     st.stop()
 except ValueError as e:
     st.error(f"Проблема с колонками в CSV: {e}")
     st.write("Реальные колонки файла:",
-             pd.read_csv("flight_data_2024.csv", nrows=0).columns.tolist())
+             pd.read_csv("flight_data_2024_small.csv", nrows=0).columns.tolist())
     st.stop()
 
 
